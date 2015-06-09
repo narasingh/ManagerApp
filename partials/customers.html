@@ -5,6 +5,7 @@
     <div class= "navbar-header" >
     <a class="btn btn-lg btn-success" href="#/edit-customer/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new Customer</a>
     </div>
+    <input type="text" class="pull-right" placeholder="Search" size="30" id="txt_search" ng-model="txt_search">
     </nav>
         <table class="table table-striped table-bordered">
         <thead>
@@ -16,13 +17,15 @@
         <th>Action&nbsp;</th>
         </thead>
         <tbody>
-            <tr ng-repeat="data in customers">
-                <td>{{data.customerName}}</td>
+            <tr ng-repeat="data in customers | filter:txt_search">
+                <td data-customer-details custid="{{data.customerNumber}}">{{data.customerName}}</td>
                 <td>{{data.email}}</td>
                 <td>{{data.address}}</td>
                 <td>{{data.city}}</td>
                 <td>{{data.country}}</td>
-                <td><a href="#/edit-customer/{{data.customerNumber}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Customer</a></td>
+                <td><a href="#/edit-customer/{{data.customerNumber}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Customer</a>
+                    <button class="btn" ng-click="deleteCust(data, $index)">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Delete</button>
+                </td>
             </tr>
         </tbody>
         </table>
@@ -31,5 +34,5 @@
         <div class="col-md-12">
             <h4>No customers found</h4>
         </div>
-    </div>
+    </div>   
 </div>

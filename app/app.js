@@ -30,10 +30,25 @@ app.factory("services", ['$http', function($http) {
     return obj;   
 }]);
 
-app.controller('listCtrl', function ($scope, services) {
+app.controller('listCtrl', function ($location, $scope, services) {
     services.getCustomers().then(function(data){
         $scope.customers = data.data;
     });
+
+    $scope.deleteCust = function(customer, index){
+
+        if(confirm("Are you sure to delete ?")){
+           services.deleteCustomer(customer.customerNumber).then(function(response){
+
+              if(response.status =="Success"){
+               $scope.customers.splice(index, 1);
+           }  
+           })
+        }
+
+    };
+
+
 });
 
 app.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams, services, customer) {
@@ -44,6 +59,7 @@ app.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams
       original._id = customerID;
       $scope.customer = angular.copy(original);
       $scope.customer._id = customerID;
+
 
       $scope.isClean = function() {
         return angular.equals(original, $scope.customer);
@@ -64,6 +80,40 @@ app.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams
             services.updateCustomer(customerID, customer);
         }
     };
+});
+
+app.directive("customerDetails", function(services){
+
+   return {
+      restrict : 'EA',
+      scope : {
+          custid : '@'
+      },
+      replace : false,
+      link : function(scope, element, attrs){
+
+         element.on("mouseover", function(e){
+            
+            var customer = services.getCustomer(scope.custid),
+                __self = $(this);
+
+
+
+            customer.then(function(response){
+
+               //scope.customer = response.data;
+               //var customer = response.data;
+               //    __self.append('<p>lorem</p>');
+            });
+
+         }).on("mouseout", function(){
+
+            //   $(this).find("p").remove(); 
+
+         })
+      }
+   }
+
 });
 
 app.config(['$routeProvider',
