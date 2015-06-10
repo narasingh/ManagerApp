@@ -17,7 +17,7 @@
         <th>Action&nbsp;</th>
         </thead>
         <tbody>
-            <tr ng-repeat="data in customers | filter:txt_search">
+            <tr ng-repeat="data in customers | searchTxt:txt_search">
                 <td data-customer-details custid="{{data.customerNumber}}">{{data.customerName}}</td>
                 <td>{{data.email}}</td>
                 <td>{{data.address}}</td>

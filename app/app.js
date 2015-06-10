@@ -60,7 +60,6 @@ app.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams
       $scope.customer = angular.copy(original);
       $scope.customer._id = customerID;
 
-
       $scope.isClean = function() {
         return angular.equals(original, $scope.customer);
       }
@@ -115,6 +114,59 @@ app.directive("customerDetails", function(services){
    }
 
 });
+
+//customer directive to validate address
+app.directive("invalidAddress", function(){
+
+   return {
+
+      restrict : 'A',
+      require : 'ngModel',
+      scope : {},
+      link : function(scope, elem, attrs, ctrl){
+
+        ctrl.$parsers.unshift(checkForChars);
+        ctrl.$formatters.unshift(checkForChars); 
+
+         function checkForChars(value){
+
+            if(value){
+                var pattern = /^[a-zA-Z\s]+$/;
+                var isValid = pattern.test(value);
+
+                ctrl.$setValidity("invalidchars", isValid);
+            }
+
+            return isValid;  
+
+         };       
+    
+      }  
+
+
+   }
+
+})
+//end
+
+app.filter("searchTxt", function(){
+
+  return function(args, string){
+    if(!string) return args;   
+
+    var res = [];
+        string = string.toLowerCase();
+
+    angular.forEach(args, function(item){
+
+      if(item.customerName.toLowerCase().indexOf(string) !== -1 ){
+         res.push(item)
+      }    
+    });
+
+    return res;
+  }  
+})
 
 app.config(['$routeProvider',
   function($routeProvider) {

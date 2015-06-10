@@ -42,7 +42,9 @@
 <div class= "form-group">
     <label class= "col-md-2">Address </label>
     <div class="col-md-4">
-    <input ng-model="customer.address" type= "text" class= "form-control" placeholder= "Present Address"/>
+    <input name="address" ng-model="customer.address" type= "text" class= "form-control" placeholder= "Present Address" ng-required="true" invalid-address />
+    <span ng-show="myForm.address.$dirty && myForm.address.$invalid && !myForm.address.$error.invalidchars" class="help-inline">Address field is required</span>
+    <span ng-show="myForm.address.$error.invalidchars" class="help-inline">Invlaid address!</span>
     </div>
 </div>
 <div class= "form-group">
@@ -65,7 +67,7 @@
                 ng-disabled="isClean() || myForm.$invalid"
                 class="btn btn-primary">{{buttonText}}</button>
         <button ng-click="deleteCustomer(customer)"
-                ng-show="customer._id" class="btn btn-warning">Delete</button>
+                ng-show="customer._id" class="btn btn-warning">Delete</button>       
     </div>
 </div>
 </div>
