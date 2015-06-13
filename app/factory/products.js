@@ -19,7 +19,7 @@ app.factory("products", ["$http", "$location", "localStorage", function($http, $
 
 		var storedItems = (localStorage !== null) ?  localStorage[this.cartName + "_items"] : null;
 
-		if(JSON !== null && storedItems){
+		if(JSON !== null && storedItems !== null && storedItems != undefined){
 
 			this.items = JSON.parse(storedItems);
 
