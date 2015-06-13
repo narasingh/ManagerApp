@@ -1,0 +1,23 @@
+ <div class="row">
+    <div class="col-md-12" ng-show="products.length > 0">
+        <div class="product-list-inline-large">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" ng-repeat="product in products">
+                <div class="thumbnail light">
+                    <a href="detail.html">
+                        <span class="label label-info price">{{product.Price | currency:'€' }}</span>
+                        <img data-hover="img/product_04b.jpg" src="https://apps.bigbase.nl/templates/data/web/5001-5/img/product_04.jpg" alt="{{product.Name}}">
+                    </a>
+                    <div class="caption">
+                        <a href="detail.html">{{product.Name}}</a>
+                    </div>
+                    <button class="btn btn-default btn-block" ng-click="addToCart(product)">Add to Cart</btn>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="products.length == 0">
+        <div class="col-md-12">
+            <h4>No products found</h4>
+        </div>
+    </div>   
+</div>

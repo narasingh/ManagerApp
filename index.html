@@ -18,7 +18,12 @@
                 AngularCode / AngularJS Demos 
             </small>
         </a><!-- /.brand -->
-        
+        <a href="#/products" class="navbar-brand">
+            <small>
+                <i class="glyphicon glyphicon-log-out"></i>
+                Products
+            </small>
+        </a>
     </div><!-- /.navbar-header -->
     <div class="navbar-header pull-right" role="navigation">
         <a href="http://angularcode.com/demo-of-a-simple-crud-restful-php-service-used-with-angularjs-and-mysql/" class="btn btn-sm btn-danger nav-button-margin"> <i class="glyphicon glyphicon-book"></i>&nbsp;Tutorial Link</a>
@@ -26,7 +31,9 @@
     </div>
     </div>
 </div>
-
+<div class="col-md-3 pull-right">
+     <ngcart-summary></ngcart-summary>  
+</div>    
 
 <div>
 <div class="container">
@@ -39,7 +46,9 @@
 </div>
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
-<script src="app/app.js"></script>  
+<script src="app/app.js"></script>
+<script src="app/factory/products.js"></script> 
+<script src="app/controller/products.js"></script>
 <script src="http://code.jquery.com/jquery.min.js"></script>       
 </body>
 </html>

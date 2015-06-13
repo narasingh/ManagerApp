@@ -149,6 +149,21 @@ app.directive("invalidAddress", function(){
 })
 //end
 
+app.directive("ngcartSummary", function(){
+
+  return {
+
+    restrict : 'EA',
+    scope : {},
+    controller : 'productCtrl',
+    transclude : true,
+    templateUrl : 'partials/summary.html'
+
+  }
+
+});
+
+
 app.filter("searchTxt", function(){
 
   return function(args, string){
@@ -186,6 +201,11 @@ app.config(['$routeProvider',
             return services.getCustomer(customerID);
           }
         }
+      })
+      .when('/products', {
+          title : 'Products',
+          templateUrl : "partials/products.html",
+          controller : 'productCtrl'
       })
       .otherwise({
         redirectTo: '/'
